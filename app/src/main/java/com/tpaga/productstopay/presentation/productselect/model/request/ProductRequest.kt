@@ -1,4 +1,4 @@
-package com.tpaga.productstopay.presentation.productselect.model
+package com.tpaga.productstopay.presentation.productselect.model.request
 
 import com.squareup.moshi.Json
 
