@@ -1,5 +1,10 @@
 package com.tpaga.productstopay.domain
 
+import com.squareup.moshi.Json
+
 data class Product(
-    var name: String, var value: String
+    @field:Json(name = "name")
+    var name: String,
+    @field:Json(name = "value")
+    var value: String
 )

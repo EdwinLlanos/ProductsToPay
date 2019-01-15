@@ -23,7 +23,7 @@ val networkModule: Module = module {
 }
 
 
-private const val BASE_URL = "http://jsonplaceholder.typicode.com/"
+private const val BASE_URL = "https://stag.wallet.tpaga.co/merchants/api/v1/"
 
 private val retrofit: Retrofit = createNetworkClient(BASE_URL, BuildConfig.DEBUG)
 

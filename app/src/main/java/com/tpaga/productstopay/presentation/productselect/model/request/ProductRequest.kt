@@ -1,9 +1,10 @@
 package com.tpaga.productstopay.presentation.productselect.model.request
 
 import com.squareup.moshi.Json
+import com.tpaga.productstopay.domain.Product
 
 
-data class ProductEntity(
+data class PurchaseEntity(
     @field:Json(name = "cost")
     var cost: String,
     @field:Json(name = "expires_at")
@@ -17,18 +18,11 @@ data class ProductEntity(
     @field:Json(name = "purchase_details_url")
     var purchaseDetailsUrl: String,
     @field:Json(name = "purchase_items")
-    var purchaseItems: List<PurchaseItem>,
+    var purchaseItems: List<Product>,
     @field:Json(name = "terminal_id")
     var terminalId: String,
     @field:Json(name = "user_ip_address")
     var userIpAddress: String,
     @field:Json(name = "voucher_url")
     var voucherUrl: String
-)
-
-data class PurchaseItem(
-    @field:Json(name = "name")
-    var name: String,
-    @field:Json(name = "value")
-    var value: String
 )

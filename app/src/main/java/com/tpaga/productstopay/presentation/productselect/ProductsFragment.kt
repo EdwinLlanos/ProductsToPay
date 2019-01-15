@@ -4,12 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tpaga.productstopay.R
 import com.tpaga.productstopay.domain.Product
+import com.tpaga.productstopay.domain.getProductToPay
 import com.tpaga.productstopay.presentation.productselect.model.response.Response
 import com.tpaga.productstopay.utilities.Resource
 import com.tpaga.productstopay.utilities.ResourceState
@@ -40,7 +40,7 @@ class ProductsFragment : Fragment() {
             noNullNotes?.let { render(it) }
         })
 
-        viewModel.store.observe(this, Observer { noNullStore ->
+        viewModel.purchase.observe(this, Observer { noNullStore ->
             noNullStore?.let { render(it) }
         })
     }
@@ -55,7 +55,6 @@ class ProductsFragment : Fragment() {
 
     private fun render(it: List<Product>) {
         adapter.add(it)
-
     }
 
     private fun initRecyclerView() {
@@ -68,6 +67,8 @@ class ProductsFragment : Fragment() {
     }
 
     private fun buyProduct(product: Product) {
-        Toast.makeText(context, product.name, Toast.LENGTH_SHORT).show()
+        viewModel.buyProduct(
+           product.getProductToPay()
+        )
     }
 }

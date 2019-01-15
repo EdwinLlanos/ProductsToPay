@@ -4,7 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel;
 import com.tpaga.productstopay.domain.Product
-import com.tpaga.productstopay.domain.ProductsManager
+import com.tpaga.productstopay.domain.ProductManager
+import com.tpaga.productstopay.presentation.productselect.model.request.PurchaseEntity
 import com.tpaga.productstopay.presentation.productselect.model.response.Response
 import com.tpaga.productstopay.respository.ProductsRepository
 import com.tpaga.productstopay.utilities.Resource
@@ -16,7 +17,7 @@ import io.reactivex.disposables.CompositeDisposable
 class ProductsViewModel(private val productsRepository: ProductsRepository) : ViewModel() {
     private val productList = MutableLiveData<List<Product>>()
     private val compositeDisposable = CompositeDisposable()
-    val store by lazy { MutableLiveData<Resource<Response>>() }
+    val purchase by lazy { MutableLiveData<Resource<Response>>() }
 
     val observableProductList: LiveData<List<Product>>
         get() = productList
@@ -26,13 +27,14 @@ class ProductsViewModel(private val productsRepository: ProductsRepository) : Vi
     }
 
     fun load() {
-        productList.value = ProductsManager.getProducts()
+        productList.value = ProductManager.getProducts()
     }
 
-    fun getInfo() {
-        compositeDisposable.add(productsRepository.get(23)
-            .doOnSubscribe { store.setLoading() }
-            .subscribe({ store.setSuccess(it) }, { store.setError(it.message) }))
+    fun buyProduct(purchaseEntity: PurchaseEntity) {
+        compositeDisposable.add(productsRepository.buyProduct(purchaseEntity)
+            .doOnSubscribe { purchase.setLoading() }
+            .subscribe({ purchase.setSuccess(it) }, { purchase.setError(it.message) })
+        )
     }
 
 }
