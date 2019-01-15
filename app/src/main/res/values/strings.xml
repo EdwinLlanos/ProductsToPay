@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">ProductsToPay</string>
     <string name="label_products">Products to pay</string>
+    <string name="titleProductPurchasedFragment">Product purchased</string>
 </resources>

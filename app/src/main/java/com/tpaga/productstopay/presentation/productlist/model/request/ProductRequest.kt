@@ -24,5 +24,5 @@ data class PurchaseEntity(
     @field:Json(name = "user_ip_address")
     var userIpAddress: String,
     @field:Json(name = "voucher_url")
-    var voucherUrl: String
+    var voucherUrl: String?
 )

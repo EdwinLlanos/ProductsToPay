@@ -21,12 +21,13 @@ fun Product.getProductToPay(): PurchaseEntity {
     return PurchaseEntity(
         "1000",
         "2019-11-05T20:10:57.549653+00:00",
-        "e40c78c2",
-        "73463",
+        "22340sfc78chfy362",
+        "472",
         "Descripción de la compra",
-        "https://example.com/compra/348820",
+        "https://www.ptpay.com/product/${this.name}",
         listOf(this),
         Build.ID,
-        "10.14.2.162", "https://example.com/comprobante/348820"
+        "10.14.2.162",
+        null
     )
 }

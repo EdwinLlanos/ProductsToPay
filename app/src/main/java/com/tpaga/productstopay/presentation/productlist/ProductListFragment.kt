@@ -1,9 +1,12 @@
 package com.tpaga.productstopay.presentation.productlist
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -51,6 +54,14 @@ class ProductListFragment : Fragment() {
             ResourceState.SUCCESS -> loading.gone()
             ResourceState.ERROR -> loading.gone()
         }
+        it.message?.run {
+            Toast.makeText(context, this, Toast.LENGTH_SHORT).show()
+        }
+        it.data?.run {
+            val myUri = Uri.parse(tpagaPaymentUrl)
+            val browserIntent = Intent(Intent.ACTION_VIEW, myUri)
+            startActivity(browserIntent)
+        }
     }
 
     private fun render(it: List<Product>) {
@@ -68,7 +79,7 @@ class ProductListFragment : Fragment() {
 
     private fun buyProduct(product: Product) {
         viewModel.buyProduct(
-           product.getProductToPay()
+            product.getProductToPay()
         )
     }
 }
