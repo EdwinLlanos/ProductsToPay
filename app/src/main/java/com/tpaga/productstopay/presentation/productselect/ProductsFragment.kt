@@ -1,4 +1,4 @@
-package com.tpaga.productstopay.presentation
+package com.tpaga.productstopay.presentation.productselect
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
