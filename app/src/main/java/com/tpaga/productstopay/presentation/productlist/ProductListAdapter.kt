@@ -1,4 +1,4 @@
-package com.tpaga.productstopay.presentation.productselect
+package com.tpaga.productstopay.presentation.productlist
 
 
 import android.view.View

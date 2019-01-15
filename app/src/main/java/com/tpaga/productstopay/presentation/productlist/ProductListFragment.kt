@@ -1,4 +1,4 @@
-package com.tpaga.productstopay.presentation.productselect
+package com.tpaga.productstopay.presentation.productlist
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.tpaga.productstopay.R
 import com.tpaga.productstopay.domain.Product
 import com.tpaga.productstopay.domain.getProductToPay
-import com.tpaga.productstopay.presentation.productselect.model.response.Response
+import com.tpaga.productstopay.presentation.productlist.model.response.Response
 import com.tpaga.productstopay.utilities.Resource
 import com.tpaga.productstopay.utilities.ResourceState
 import com.tpaga.productstopay.utilities.gone
@@ -19,9 +19,9 @@ import kotlinx.android.synthetic.main.loading_view.*
 import kotlinx.android.synthetic.main.products_fragment.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class ProductsFragment : Fragment() {
+class ProductListFragment : Fragment() {
 
-    private val viewModel: ProductsViewModel by viewModel()
+    private val viewModel: ProductListViewModel by viewModel()
 
     private var adapter = ProductListAdapter()
 
@@ -62,7 +62,7 @@ class ProductsFragment : Fragment() {
         recyclerView.adapter = adapter
         recyclerView.setHasFixedSize(true)
         adapter.apply {
-            onProductClicked = this@ProductsFragment::buyProduct
+            onProductClicked = this@ProductListFragment::buyProduct
         }
     }
 

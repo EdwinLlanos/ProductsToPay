@@ -1,24 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/products_to_pay_navigation"
-    app:startDestination="@+id/productsFragment">
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/products_to_pay_navigation"
+            app:startDestination="@+id/productsFragment">
 
     <fragment
             android:id="@+id/productsFragment"
-            android:name="com.tpaga.productstopay.presentation.productselect.ProductsFragment"
+            android:name="com.tpaga.productstopay.presentation.productlist.ProductListFragment"
             android:label="@string/label_products"
             tools:layout="@layout/products_fragment">
 
         <!--<action-->
-                <!--android:id="@+id/action_notes_to_noteDetail"-->
-                <!--app:destination="@id/noteDetailFragment"-->
-                <!--app:enterAnim="@anim/enter_slide_down"-->
-                <!--app:exitAnim="@anim/exit_slide_down"-->
-                <!--app:popEnterAnim="@anim/pop_enter_slide_up"-->
-                <!--app:popExitAnim="@anim/pop_exit_slide_up" />-->
+        <!--android:id="@+id/action_notes_to_noteDetail"-->
+        <!--app:destination="@id/noteDetailFragment"-->
+        <!--app:enterAnim="@anim/enter_slide_down"-->
+        <!--app:exitAnim="@anim/exit_slide_down"-->
+        <!--app:popEnterAnim="@anim/pop_enter_slide_up"-->
+        <!--app:popExitAnim="@anim/pop_exit_slide_up" />-->
 
+    </fragment>
+    <fragment android:id="@+id/productPurchasedFragment"
+              android:name="com.tpaga.productstopay.presentation.productpurchased.ProductPurchasedFragment"
+              android:label="product purchased"
+              tools:layout="@layout/product_purchased_fragment">
+        <argument
+                android:name="productId"
+                app:argType="integer" />
+        <deepLink android:id="@+id/deepLink" app:uri="ptpay://product/{productId}"/>
     </fragment>
 
 </navigation>

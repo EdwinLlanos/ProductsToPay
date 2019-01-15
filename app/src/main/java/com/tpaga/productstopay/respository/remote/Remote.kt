@@ -1,8 +1,8 @@
 package com.tpaga.productstopay.respository.remote
 
 
-import com.tpaga.productstopay.presentation.productselect.model.request.PurchaseEntity
-import com.tpaga.productstopay.presentation.productselect.model.response.Response
+import com.tpaga.productstopay.presentation.productlist.model.request.PurchaseEntity
+import com.tpaga.productstopay.presentation.productlist.model.response.Response
 import io.reactivex.Single
 import retrofit2.http.Body
 import retrofit2.http.POST
