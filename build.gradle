@@ -42,6 +42,8 @@ buildscript {
         //animation
         lottie = "3.0.0-beta1"
 
+        //cache
+        rxpaper = "1.4.0"
 
     }
     repositories {

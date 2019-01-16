@@ -23,6 +23,9 @@ android {
         }
     }
 }
+repositories {
+    maven { url "https://jitpack.io" }
+}
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -57,4 +60,7 @@ dependencies {
     implementation "org.koin:koin-android-viewmodel:$rootProject.koinVersion"
     implementation "org.koin:koin-java:$rootProject.koinJava"
     implementation "com.airbnb.android:lottie:$rootProject.lottie"
+
+    //cache
+    implementation "com.github.pakoito:RxPaper2:$rootProject.rxpaper"
 }
