@@ -1,28 +1,28 @@
-package com.tpaga.productstopay.presentation.productlist
+package com.tpaga.productstopay.presentation.orders
 
 
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.tpaga.productstopay.R
-import com.tpaga.productstopay.domain.Product
+import com.tpaga.productstopay.presentation.products.model.response.ProductEntity
 import com.tpaga.productstopay.utilities.inflate
-import kotlinx.android.synthetic.main.item_product_list.view.*
+import kotlinx.android.synthetic.main.item_order_list.view.*
 
 
-class ProductListAdapter : RecyclerView.Adapter<ProductListAdapter.ProductHolder>() {
+class OrderListAdapter : RecyclerView.Adapter<OrderListAdapter.ProductHolder>() {
 
-    private var productList: List<Product> = listOf()
+    private var productList: List<ProductEntity> = listOf()
 
-    fun add(productList: List<Product>) {
+    fun add(productList: List<ProductEntity>) {
         this.productList = productList
         notifyDataSetChanged()
     }
 
-    var onProductClicked: ((product: Product) -> Unit)? = null
+    var onProductClicked: ((product: ProductEntity) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductHolder {
-        val inflatedView = parent.inflate(R.layout.item_product_list, false)
+        val inflatedView = parent.inflate(R.layout.item_order_list, false)
         return ProductHolder(inflatedView, onProductClicked)
 
     }
@@ -39,20 +39,20 @@ class ProductListAdapter : RecyclerView.Adapter<ProductListAdapter.ProductHolder
 
     class ProductHolder(
         private val view: View,
-        private val onCityClickAction: ((product: Product) -> Unit)?
+        private val onProductClicked: ((product: ProductEntity) -> Unit)?
     ) :
         RecyclerView.ViewHolder(view) {
-        private lateinit var product: Product
+        private lateinit var product: ProductEntity
 
         init {
             view.setOnClickListener {
-                onCityClickAction!!.invoke(product)
+                onProductClicked!!.invoke(product)
             }
         }
 
-        fun bindCity(product: Product) {
+        fun bindCity(product: ProductEntity) {
             this.product = product
-            view.productName.text = product.name
+            view.status.text = product.status
         }
 
     }

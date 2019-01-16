@@ -1,8 +1,8 @@
 package com.tpaga.productstopay.respository
 
 import com.tpaga.productstopay.cache.Cache
-import com.tpaga.productstopay.presentation.productlist.model.request.PurchaseEntity
-import com.tpaga.productstopay.presentation.productlist.model.response.ProductEntity
+import com.tpaga.productstopay.presentation.products.model.request.PurchaseEntity
+import com.tpaga.productstopay.presentation.products.model.response.ProductEntity
 import com.tpaga.productstopay.respository.remote.ProductsApi
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -20,21 +20,42 @@ class ProductsRepository constructor(
             .doOnSuccess { set(it) }
     }
 
-    private fun set(it: ProductEntity?) {
-        it?.let {
-            cache.save(key, listOf(it))
+    fun getStatus(token: String): Single<ProductEntity> {
+        return productsApi.getStatus(token)
+            .subscribeOn(Schedulers.newThread())
+            .observeOn(AndroidSchedulers.mainThread())
+//            .doOnSuccess { set(it) }
+    }
+
+    private fun set(product: ProductEntity?) {
+        val newList: MutableList<ProductEntity> = ArrayList()
+        product?.let {
+            newList.add(product)
+            cache.load(key)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe()
+                .subscribe({ list ->
+                    newList.addAll(list.filter { p-> p.orderId!= product.orderId})
+                    cache.save(key, newList)
+                        .subscribeOn(Schedulers.newThread())
+                        .observeOn(AndroidSchedulers.mainThread()).subscribe()
+                }, {})
         }
     }
 
-    fun load(productId: String): Single<List<ProductEntity>> {
+    fun loadById(productId: String): Single<List<ProductEntity>> {
         return cache.load(key)
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
             .map { list ->
                 list.filter { it.orderId == productId }
             }
+    }
+
+    fun loadAll(): Single<List<ProductEntity>> {
+        return cache.load(key)
+            .subscribeOn(Schedulers.newThread())
+            .observeOn(AndroidSchedulers.mainThread())
+
     }
 }

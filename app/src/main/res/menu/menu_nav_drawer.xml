@@ -3,6 +3,6 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/productPurchasedFragment"
-            android:title="@string/titleProductPurchasedFragment" />
+            android:title="@string/title_product_purchased_fragment" />
     </group>
 </menu>

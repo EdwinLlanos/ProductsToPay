@@ -7,7 +7,7 @@
 
     <fragment
             android:id="@+id/productsFragment"
-            android:name="com.tpaga.productstopay.presentation.productlist.ProductListFragment"
+            android:name="com.tpaga.productstopay.presentation.products.ProductListFragment"
             android:label="@string/label_products"
             tools:layout="@layout/products_fragment">
 
@@ -21,7 +21,7 @@
 
     </fragment>
     <fragment android:id="@+id/productPurchasedFragment"
-              android:name="com.tpaga.productstopay.presentation.productpurchased.ProductPurchasedFragment"
+              android:name="com.tpaga.productstopay.presentation.orders.OrderListFragment"
               android:label="product purchased"
               tools:layout="@layout/product_purchased_fragment">
         <argument

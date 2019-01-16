@@ -1,12 +1,12 @@
-package com.tpaga.productstopay.presentation.productlist
+package com.tpaga.productstopay.presentation.products
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.tpaga.productstopay.domain.Product
 import com.tpaga.productstopay.domain.ProductManager
-import com.tpaga.productstopay.presentation.productlist.model.request.PurchaseEntity
-import com.tpaga.productstopay.presentation.productlist.model.response.ProductEntity
+import com.tpaga.productstopay.presentation.products.model.request.PurchaseEntity
+import com.tpaga.productstopay.presentation.products.model.response.ProductEntity
 import com.tpaga.productstopay.respository.ProductsRepository
 import com.tpaga.productstopay.utilities.Resource
 import com.tpaga.productstopay.utilities.setError
@@ -40,7 +40,7 @@ class ProductListViewModel(private val productsRepository: ProductsRepository) :
 
     fun validateProduct(productId: String) {
         compositeDisposable.add(
-            productsRepository.load(productId)
+            productsRepository.loadById(productId)
                 .subscribe({ productsPending.setSuccess(it) }, { productsPending.setError(it.message) })
         )
     }

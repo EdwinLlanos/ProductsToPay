@@ -1,7 +1,7 @@
 package com.tpaga.productstopay.domain
 
 import android.os.Build
-import com.tpaga.productstopay.presentation.productlist.model.request.PurchaseEntity
+import com.tpaga.productstopay.presentation.products.model.request.PurchaseEntity
 
 object ProductManager {
 
