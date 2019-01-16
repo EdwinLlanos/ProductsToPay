@@ -1,8 +1,10 @@
 package com.tpaga.productstopay.di
 
 import com.tpaga.productstopay.BuildConfig
+import com.tpaga.productstopay.cache.Cache
 import com.tpaga.productstopay.network.createNetworkClient
 import com.tpaga.productstopay.presentation.productlist.ProductListViewModel
+import com.tpaga.productstopay.presentation.productlist.model.response.ProductEntity
 import com.tpaga.productstopay.respository.ProductsRepository
 import com.tpaga.productstopay.respository.remote.ProductsApi
 import org.koin.android.viewmodel.ext.koin.viewModel
@@ -15,11 +17,15 @@ val viewModelModule: Module = module {
 }
 
 val repositoryModule: Module = module {
-    single { ProductsRepository(productsApi = get()) }
+    single { ProductsRepository(productsApi = get(), cache = get(PURCHASE_ENTITY_CACHE)) }
 }
 
 val networkModule: Module = module {
     single { productsApi }
+}
+
+val cacheModule: Module = module {
+    single(name = PURCHASE_ENTITY_CACHE) { Cache<List<ProductEntity>>() }
 }
 
 
@@ -29,3 +35,5 @@ private val retrofit: Retrofit = createNetworkClient(BASE_URL, BuildConfig.DEBUG
 
 
 private val productsApi: ProductsApi = retrofit.create(ProductsApi::class.java)
+
+private const val PURCHASE_ENTITY_CACHE = "PURCHASE_ENTITY_CACHE"

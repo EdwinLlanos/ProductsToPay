@@ -2,11 +2,11 @@ package com.tpaga.productstopay.presentation.productlist
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModel
 import com.tpaga.productstopay.domain.Product
 import com.tpaga.productstopay.domain.ProductManager
 import com.tpaga.productstopay.presentation.productlist.model.request.PurchaseEntity
-import com.tpaga.productstopay.presentation.productlist.model.response.Response
+import com.tpaga.productstopay.presentation.productlist.model.response.ProductEntity
 import com.tpaga.productstopay.respository.ProductsRepository
 import com.tpaga.productstopay.utilities.Resource
 import com.tpaga.productstopay.utilities.setError
@@ -17,7 +17,8 @@ import io.reactivex.disposables.CompositeDisposable
 class ProductListViewModel(private val productsRepository: ProductsRepository) : ViewModel() {
     private val productList = MutableLiveData<List<Product>>()
     private val compositeDisposable = CompositeDisposable()
-    val purchase by lazy { MutableLiveData<Resource<Response>>() }
+    val purchase = MutableLiveData<Resource<ProductEntity>>()
+    val productsPending = MutableLiveData<Resource<List<ProductEntity>>>()
 
     val observableProductList: LiveData<List<Product>>
         get() = productList
@@ -26,7 +27,7 @@ class ProductListViewModel(private val productsRepository: ProductsRepository) :
         load()
     }
 
-    fun load() {
+    private fun load() {
         productList.value = ProductManager.getProducts()
     }
 
@@ -35,6 +36,19 @@ class ProductListViewModel(private val productsRepository: ProductsRepository) :
             .doOnSubscribe { purchase.setLoading() }
             .subscribe({ purchase.setSuccess(it) }, { purchase.setError(it.message) })
         )
+    }
+
+    fun validateProduct(productId: String) {
+        compositeDisposable.add(
+            productsRepository.load(productId)
+                .subscribe({ productsPending.setSuccess(it) }, { productsPending.setError(it.message) })
+        )
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        compositeDisposable.dispose()
+
     }
 
 }

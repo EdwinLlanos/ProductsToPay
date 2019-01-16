@@ -2,4 +2,5 @@
     <string name="app_name">ProductsToPay</string>
     <string name="label_products">Products to pay</string>
     <string name="titleProductPurchasedFragment">Product purchased</string>
+    <string name="error_message_order_pending">Tienes una órden pendiente con este producto.</string>
 </resources>

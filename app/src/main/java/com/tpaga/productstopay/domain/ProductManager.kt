@@ -6,10 +6,10 @@ import com.tpaga.productstopay.presentation.productlist.model.request.PurchaseEn
 object ProductManager {
 
     private var products = listOf(
-        Product("nameuno", "1000"),
-        Product("name dos", "2000"),
-        Product("name tres", "3000"),
-        Product("name cuatro", "4000")
+        Product("1", "nameuno", "1000"),
+        Product("2", "name dos", "2000"),
+        Product("3", "name tres", "3000"),
+        Product("4", "name cuatro", "4000")
     )
 
     fun getProducts(): List<Product> {
@@ -18,13 +18,14 @@ object ProductManager {
 }
 
 fun Product.getProductToPay(): PurchaseEntity {
+
     return PurchaseEntity(
         "1000",
         "2019-11-05T20:10:57.549653+00:00",
-        "22340sfcasdfay3dfsdf62",
-        "472",
+        "${System.currentTimeMillis()}",
+        id,
         "Descripción de la compra",
-        "https://www.ptpay.com/product/${this.name}",
+        "https://www.ptpay.com/product/${this.id}",
         listOf(this),
         Build.ID,
         "10.14.2.162",

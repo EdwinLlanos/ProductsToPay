@@ -2,7 +2,7 @@ package com.tpaga.productstopay.presentation.productlist.model.response
 
 import com.squareup.moshi.Json
 
-data class Response(
+data class ProductEntity(
     @field:Json(name = "cancelled_at")
     var cancelledAt: Any,
     @field:Json(name = "checked_by_merchant_at")

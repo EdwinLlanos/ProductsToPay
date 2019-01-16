@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.tpaga.productstopay.R
 import com.tpaga.productstopay.domain.Product
 import com.tpaga.productstopay.domain.getProductToPay
-import com.tpaga.productstopay.presentation.productlist.model.response.Response
+import com.tpaga.productstopay.presentation.productlist.model.response.ProductEntity
 import com.tpaga.productstopay.utilities.Resource
 import com.tpaga.productstopay.utilities.ResourceState
 import com.tpaga.productstopay.utilities.gone
@@ -28,6 +28,8 @@ class ProductListFragment : Fragment() {
 
     private var adapter = ProductListAdapter()
 
+    private lateinit var product: Product
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -35,9 +37,8 @@ class ProductListFragment : Fragment() {
         return inflater.inflate(R.layout.products_fragment, container, false)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        initRecyclerView()
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
         viewModel.observableProductList.observe(this, Observer { noNullNotes ->
             noNullNotes?.let { render(it) }
@@ -46,22 +47,43 @@ class ProductListFragment : Fragment() {
         viewModel.purchase.observe(this, Observer { noNullStore ->
             noNullStore?.let { render(it) }
         })
+
+        viewModel.productsPending.observe(this, Observer { renderList(it) })
     }
 
-    private fun render(it: Resource<Response>) {
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        initRecyclerView()
+    }
+
+    private fun renderList(it: Resource<List<ProductEntity>>?) {
+        if (it?.data?.size == 1) {
+            Toast.makeText(context, getString(R.string.error_message_order_pending), Toast.LENGTH_LONG).show()
+            return
+        }
+        viewModel.buyProduct(
+            product.getProductToPay()
+        )
+    }
+
+
+    private fun render(it: Resource<ProductEntity>) {
         when (it.state) {
             ResourceState.LOADING -> loading.visible()
-            ResourceState.SUCCESS -> loading.gone()
+            ResourceState.SUCCESS -> {
+                loading.gone()
+                it.data?.run {
+                    val myUri = Uri.parse(tpagaPaymentUrl)
+                    val browserIntent = Intent(Intent.ACTION_VIEW, myUri)
+                    startActivity(browserIntent)
+                }
+            }
             ResourceState.ERROR -> loading.gone()
         }
         it.message?.run {
             Toast.makeText(context, this, Toast.LENGTH_SHORT).show()
         }
-        it.data?.run {
-            val myUri = Uri.parse(tpagaPaymentUrl)
-            val browserIntent = Intent(Intent.ACTION_VIEW, myUri)
-            startActivity(browserIntent)
-        }
+
     }
 
     private fun render(it: List<Product>) {
@@ -78,8 +100,8 @@ class ProductListFragment : Fragment() {
     }
 
     private fun buyProduct(product: Product) {
-        viewModel.buyProduct(
-            product.getProductToPay()
-        )
+        this.product = product
+        viewModel.validateProduct(product.id)
     }
 }
+

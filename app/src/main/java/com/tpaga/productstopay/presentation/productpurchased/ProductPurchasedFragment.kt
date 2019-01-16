@@ -14,8 +14,8 @@ class ProductPurchasedFragment : Fragment() {
 
     private lateinit var viewModel: ProductPurchasedViewModel
 
-    private val productName by lazy {
-        fromBundle(arguments!!).productName
+    private val orderId by lazy {
+        fromBundle(arguments!!).orderId
     }
 
 
@@ -29,7 +29,7 @@ class ProductPurchasedFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(ProductPurchasedViewModel::class.java)
-        currentProductId.text = "Hollaaa $productName"
+        currentProductId.text = "Hollaaa $orderId"
     }
 
 }
