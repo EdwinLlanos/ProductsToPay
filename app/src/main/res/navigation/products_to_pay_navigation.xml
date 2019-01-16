@@ -25,12 +25,12 @@
               android:label="product purchased"
               tools:layout="@layout/product_purchased_fragment">
         <argument
-                android:name="productId"
-                app:argType="integer"
-                android:defaultValue="0"/>
+                android:name="productName"
+                app:argType="string"
+                android:defaultValue="name"/>
         <deepLink
                 android:id="@+id/webUrlDeepLink"
-                app:uri="https://www.ptpay.com/product/{productId}"/>
+                app:uri="https://www.ptpay.com/product/{productName}"/>
     </fragment>
 
 </navigation>

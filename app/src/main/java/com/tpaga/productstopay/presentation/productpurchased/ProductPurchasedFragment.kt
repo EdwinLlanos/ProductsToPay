@@ -12,14 +12,10 @@ import kotlinx.android.synthetic.main.product_purchased_fragment.*
 
 class ProductPurchasedFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = ProductPurchasedFragment()
-    }
-
     private lateinit var viewModel: ProductPurchasedViewModel
 
-    private val productId by lazy {
-        fromBundle(arguments!!).productId
+    private val productName by lazy {
+        fromBundle(arguments!!).productName
     }
 
 
@@ -33,7 +29,7 @@ class ProductPurchasedFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(ProductPurchasedViewModel::class.java)
-        currentProductId.text = "Hollaaa $productId"
+        currentProductId.text = "Hollaaa $productName"
     }
 
 }
