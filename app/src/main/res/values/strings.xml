@@ -1,10 +1,10 @@
 <resources>
     <string name="app_name">ProductsToPay</string>
-    <string name="label_products">Products to pay</string>
-    <string name="title_product_purchased_fragment">Product purchased</string>
+    <string name="label_products">Comprar</string>
+    <string name="title_product_purchased_fragment">Mis compras</string>
     <string name="error_message_order_pending">Tienes una órden pendiente con este producto.</string>
     <string name="title_product_purchased">Tienes un total de %1$d compras</string>
-    <string name="message_order_update">"La órden con id %1$s se encuentra en estado %2$s"</string>
-    <string name="order_update">Órden Actulaizada</string>
+    <string name="message_order_update">"El estado de la órden con id: %1$s es: %2$s"</string>
+    <string name="order_update">Información de la órden</string>
     <string name="text_button_accept">Aceptar</string>
 </resources>

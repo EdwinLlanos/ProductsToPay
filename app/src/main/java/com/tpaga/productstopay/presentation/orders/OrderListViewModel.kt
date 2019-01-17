@@ -34,14 +34,26 @@ class OrderListViewModel(
         compositeDisposable.add(
             productsRepository.getStatus(token)
                 .doOnSubscribe { orderUpdate.setLoading() }
-                .subscribe({ orderUpdate.setSuccess(it) }, { orderUpdate.setError(it.message) })
+                .subscribe(
+                    {
+                        orderUpdate.setSuccess(it)
+                        load()
+                    }, { orderUpdate.setError(it.message) })
         )
     }
+
+    fun getTokenByOrderId(orderId: String) {
+        compositeDisposable.add(
+            productsRepository.loadById(orderId)
+                .subscribe({ getStatus(it[0].token) }, {})
+        )
+    }
+
 
     override fun onCleared() {
         super.onCleared()
         compositeDisposable.dispose()
-
     }
+
 
 }

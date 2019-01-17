@@ -32,8 +32,12 @@ class OrderListFragment : Fragment() {
         super.onCreate(savedInstanceState)
         viewModel.orderList.observe(this, Observer { render(it) })
         viewModel.orderUpdate.observe(this, Observer { orderUpdate(it) })
+        validateOrderId()
+    }
 
-        //get token by orderId and send request if orderId != 0
+    private fun validateOrderId() {
+        if (orderId != "0")
+            viewModel.getTokenByOrderId(orderId)
     }
 
     private fun orderUpdate(it: Resource<ProductEntity>?) {
