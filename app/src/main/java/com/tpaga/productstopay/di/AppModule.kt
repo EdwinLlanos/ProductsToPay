@@ -3,9 +3,9 @@ package com.tpaga.productstopay.di
 import com.tpaga.productstopay.BuildConfig
 import com.tpaga.productstopay.cache.Cache
 import com.tpaga.productstopay.network.createNetworkClient
+import com.tpaga.productstopay.presentation.orders.OrderListViewModel
 import com.tpaga.productstopay.presentation.products.ProductListViewModel
 import com.tpaga.productstopay.presentation.products.model.response.ProductEntity
-import com.tpaga.productstopay.presentation.orders.OrderListViewModel
 import com.tpaga.productstopay.respository.ProductsRepository
 import com.tpaga.productstopay.respository.remote.ProductsApi
 import org.koin.android.viewmodel.ext.koin.viewModel
