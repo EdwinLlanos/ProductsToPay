@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -58,12 +59,27 @@ class ProductListFragment : Fragment() {
 
     private fun renderList(it: Resource<List<ProductEntity>>?) {
         if (it?.data?.size == 1) {
-            Toast.makeText(context, getString(R.string.error_message_order_pending), Toast.LENGTH_LONG).show()
+            showAlertDialog()
             return
         }
         viewModel.buyProduct(
             getProductToPay(product)
         )
+    }
+
+    private fun showAlertDialog() {
+        val builder = AlertDialog.Builder(context!!)
+        builder.setTitle(getString(R.string.order_notice))
+        builder.setMessage(getString(R.string.message_confirm_purchase))
+        builder.setPositiveButton(getString(R.string.text_button_accept)) { dialog, _ ->
+            dialog.cancel()
+            viewModel.buyProduct(
+                getProductToPay(product)
+            )
+        }
+        val dialog: AlertDialog = builder.create()
+        dialog.show()
+
     }
 
 

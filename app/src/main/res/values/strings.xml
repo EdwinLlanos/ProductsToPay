@@ -2,12 +2,16 @@
     <string name="app_name">ProductsToPay</string>
     <string name="label_products">Comprar</string>
     <string name="title_product_purchased_fragment">Mis compras</string>
-    <string name="error_message_order_pending">Tienes una órden pendiente con este producto.</string>
     <string name="title_product_purchased">Tienes un total de %1$d compras</string>
     <string name="message_order_update">"El estado de la órden con id: %1$s es: %2$s"</string>
     <string name="order_update">Información de la órden</string>
+    <string name="order_notice">¡Atención!</string>
     <string name="text_button_accept">Aceptar</string>
     <string name="order_text_status">"Estado: %1$s"</string>
     <string name="order_text_price">"Valor: %1$s"</string>
-    <string name="order_text_id">"Consecutivo: %1$s"</string>
+    <string name="order_text_name">"Nombre: %1$s"</string>
+    <string name="order_text_count">"Cantidad: %1$d"</string>
+    <string name="order_text_id">"Id: %1$s"</string>
+    <string name="message_confirm_purchase">Ya tienes una órden con este producto, ¿deseas realizar una nueva compra?.
+    </string>
 </resources>

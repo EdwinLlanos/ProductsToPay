@@ -16,7 +16,7 @@
         <item name="android:layout_centerInParent">true</item>
         <item name="android:text">@string/testDefault</item>
         <item name="android:gravity">center</item>
-        <item name="android:layout_margin">8dp</item>
+        <item name="android:layout_margin">6dp</item>
     </style>
 
 
@@ -38,7 +38,7 @@
         <item name="android:textSize">@dimen/fontSizeLight</item>
         <item name="android:text">@string/testDefault</item>
         <item name="android:gravity">left</item>
-        <item name="android:layout_margin">4dp</item>
+        <item name="android:layout_margin">2dp</item>
     </style>
 
     <dimen name="fontSizeNormal">18sp</dimen>

@@ -58,7 +58,8 @@ class OrderListAdapter : RecyclerView.Adapter<OrderListAdapter.ProductHolder>() 
             view.orderStatus.text = view.context.getString(R.string.order_text_status, product.status)
             view.orderDescription.text = product.purchaseDescription
             view.orderPrice.text = view.context.getString(R.string.order_text_price, product.cost)
-
+            view.productName.text = view.context.getString(R.string.order_text_name, product.purchaseItems[0].name)
+            view.productCount.text = view.context.getString(R.string.order_text_count, product.purchaseItems.size)
         }
 
     }

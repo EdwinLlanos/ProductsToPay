@@ -38,6 +38,14 @@
                     style="@style/ProductTextViewLight"/>
 
             <TextView
+                    android:id="@+id/productCount"
+                    style="@style/ProductTextViewLight"/>
+
+            <TextView
+                    android:id="@+id/productName"
+                    style="@style/ProductTextViewLight"/>
+
+            <TextView
                     android:id="@+id/orderPrice"
                     style="@style/ProductTextViewLight"/>
         </LinearLayout>
