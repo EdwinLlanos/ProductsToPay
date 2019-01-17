@@ -7,4 +7,6 @@
     <string name="message_order_update">"El estado de la órden con id: %1$s es: %2$s"</string>
     <string name="order_update">Información de la órden</string>
     <string name="text_button_accept">Aceptar</string>
+    <string name="order_text_status">"Estado: %1$s"</string>
+    <string name="order_text_price">"Valor: %1$s"</string>
 </resources>

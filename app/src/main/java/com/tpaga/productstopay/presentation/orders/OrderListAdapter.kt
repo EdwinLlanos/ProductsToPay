@@ -1,6 +1,7 @@
 package com.tpaga.productstopay.presentation.orders
 
 
+import android.annotation.SuppressLint
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -50,9 +51,14 @@ class OrderListAdapter : RecyclerView.Adapter<OrderListAdapter.ProductHolder>() 
             }
         }
 
+        @SuppressLint("SetTextI18n")
         fun bindCity(product: ProductEntity) {
             this.product = product
-            view.status.text = product.status
+            view.orderId.text = product.orderId
+            view.orderStatus.text = view.context.getString(R.string.order_text_status, product.status)
+            view.orderDescription.text = product.purchaseDescription
+            view.orderPrice.text = view.context.getString(R.string.order_text_price, product.cost)
+
         }
 
     }
