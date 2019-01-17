@@ -12,7 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tpaga.productstopay.R
 import com.tpaga.productstopay.domain.Product
-import com.tpaga.productstopay.domain.getProductToPay
+import com.tpaga.productstopay.domain.ProductManager.getProductToPay
 import com.tpaga.productstopay.presentation.products.model.response.ProductEntity
 import com.tpaga.productstopay.utilities.Resource
 import com.tpaga.productstopay.utilities.ResourceState
@@ -62,7 +62,7 @@ class ProductListFragment : Fragment() {
             return
         }
         viewModel.buyProduct(
-            product.getProductToPay()
+            getProductToPay(product)
         )
     }
 
@@ -73,9 +73,9 @@ class ProductListFragment : Fragment() {
             ResourceState.SUCCESS -> {
                 loading.gone()
                 it.data?.run {
-//                    val myUri = Uri.parse(tpagaPaymentUrl)
-//                    val browserIntent = Intent(Intent.ACTION_VIEW, myUri)
-//                    startActivity(browserIntent)
+                    val myUri = Uri.parse(tpagaPaymentUrl)
+                    val browserIntent = Intent(Intent.ACTION_VIEW, myUri)
+                    startActivity(browserIntent)
                 }
             }
             ResourceState.ERROR -> loading.gone()

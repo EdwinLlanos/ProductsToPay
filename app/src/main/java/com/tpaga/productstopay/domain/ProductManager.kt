@@ -5,6 +5,11 @@ import com.tpaga.productstopay.presentation.products.model.request.PurchaseEntit
 
 object ProductManager {
 
+    private const val DESCRIPTION = "Descripción de la compra"
+    private const val EXPIRES_AT = "2019-11-05T20:10:57.549653+00:00"
+    private const val USER_IP_ADDRESS = "10.14.2.162"
+
+
     private var products = listOf(
         Product("1", "nameuno", "1000"),
         Product("2", "name dos", "2000"),
@@ -15,20 +20,22 @@ object ProductManager {
     fun getProducts(): List<Product> {
         return products
     }
+
+    fun getProductToPay(product: Product): PurchaseEntity {
+        return PurchaseEntity(
+            product.value,
+            EXPIRES_AT,
+            "${System.currentTimeMillis()}",
+            product.id,
+            DESCRIPTION,
+            "https://www.ptpay.com/product/${product.id}",
+            listOf(product),
+            Build.ID,
+            USER_IP_ADDRESS,
+            null
+        )
+    }
+
 }
 
-fun Product.getProductToPay(): PurchaseEntity {
 
-    return PurchaseEntity(
-        "1000",
-        "2019-11-05T20:10:57.549653+00:00",
-        "${System.currentTimeMillis()}",
-        id,
-        "Descripción de la compra",
-        "https://www.ptpay.com/product/${this.id}",
-        listOf(this),
-        Build.ID,
-        "10.14.2.162",
-        null
-    )
-}

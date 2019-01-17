@@ -24,23 +24,29 @@ class ProductsRepository constructor(
         return productsApi.getStatus(token)
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
-//            .doOnSuccess { set(it) }
+            .doOnSuccess { set(it) }
     }
 
     private fun set(product: ProductEntity?) {
         val newList: MutableList<ProductEntity> = ArrayList()
         product?.let {
-            newList.add(product)
             cache.load(key)
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ list ->
-                    newList.addAll(list.filter { p-> p.orderId!= product.orderId})
-                    cache.save(key, newList)
-                        .subscribeOn(Schedulers.newThread())
-                        .observeOn(AndroidSchedulers.mainThread()).subscribe()
-                }, {})
+                    newList.addAll(list.filter { p -> p.orderId != product.orderId })
+                    newList.add(product)
+                    saveList(newList)
+                }, {
+                    saveList(newList)
+                    set(product)
+                })
         }
+    }
+
+    private fun saveList(list: MutableList<ProductEntity>) {
+        cache.save(key, list)
+            .subscribeOn(Schedulers.newThread())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe()
     }
 
     fun loadById(productId: String): Single<List<ProductEntity>> {
