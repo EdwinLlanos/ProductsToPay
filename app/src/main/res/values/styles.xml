@@ -12,7 +12,7 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/colorPrimaryDark</item>
-        <item name="android:textSize">@dimen/fontSizeName</item>
+        <item name="android:textSize">@dimen/fontSizeNormal</item>
         <item name="android:layout_centerInParent">true</item>
         <item name="android:text">@string/testDefault</item>
         <item name="android:gravity">center</item>
@@ -20,19 +20,31 @@
     </style>
 
 
-    <style name="ProductTextViewName">
+    <style name="ProductTextViewNormal">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/colorFontNormal</item>
-        <item name="android:textSize">@dimen/fontSizeName</item>
+        <item name="android:textSize">@dimen/fontSizeNormal</item>
         <item name="android:layout_centerInParent">true</item>
         <item name="android:text">@string/testDefault</item>
         <item name="android:gravity">center</item>
         <item name="android:layout_margin">16dp</item>
     </style>
 
-    <dimen name="fontSizeName">18sp</dimen>
-    <dimen name="marginSizeName">12sp</dimen>
+    <style name="ProductTextViewLight">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/colorFontLight</item>
+        <item name="android:textSize">@dimen/fontSizeLight</item>
+        <item name="android:text">@string/testDefault</item>
+        <item name="android:gravity">left</item>
+        <item name="android:layout_margin">16dp</item>
+    </style>
+
+    <dimen name="fontSizeNormal">18sp</dimen>
+    <dimen name="fontSizeLight">14sp</dimen>
+    <dimen name="marginSizeNormal">12sp</dimen>
     <string name="testDefault">Default</string>
-    <color name="colorFontNormal">#FFFFFF</color>
+    <color name="colorFontNormal">#4E4D4D</color>
+    <color name="colorFontLight">#727171</color>
 </resources>

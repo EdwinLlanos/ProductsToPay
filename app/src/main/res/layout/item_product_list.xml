@@ -5,16 +5,38 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        card_view:cardBackgroundColor="@color/design_default_color_primary_dark"
         card_view:cardCornerRadius="10dp"
         card_view:cardElevation="5dp"
         card_view:cardUseCompatPadding="true">
     <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-        <TextView
-                android:id="@+id/productName"
-                style="@style/ProductTextViewName"/>
+        <ImageView
+
+                android:id="@+id/image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_coffee_cup"/>
+        <LinearLayout
+                android:layout_toRightOf="@+id/image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+            <TextView
+                    android:id="@+id/productName"
+                    style="@style/ProductTextViewNormal"/>
+
+            <TextView
+                    android:id="@+id/productDescription"
+                    style="@style/ProductTextViewLight"/>
+
+            <TextView
+                    android:id="@+id/productPrice"
+                    style="@style/ProductTextViewLight"/>
+        </LinearLayout>
+
 
     </RelativeLayout>
 

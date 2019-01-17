@@ -50,9 +50,12 @@ class ProductListAdapter : RecyclerView.Adapter<ProductListAdapter.ProductHolder
             }
         }
 
+
         fun bindCity(product: Product) {
             this.product = product
             view.productName.text = product.name
+            view.productDescription.text = product.description
+            view.productPrice.text = "Valor: $" + product.value
         }
 
     }

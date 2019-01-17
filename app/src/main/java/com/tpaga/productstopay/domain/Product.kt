@@ -8,6 +8,8 @@ data class Product(
     @field:Json(name = "name")
     var name: String,
     @field:Json(name = "value")
-    var value: String
+    var value: String,
+    @field:Json(name = "description")
+    var description: String
 
 )
