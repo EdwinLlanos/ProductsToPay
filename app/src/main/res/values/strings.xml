@@ -14,4 +14,5 @@
     <string name="order_text_id">"Id: %1$s"</string>
     <string name="message_confirm_purchase">Ya tienes una órden con este producto, ¿deseas ver tus compras?.
     </string>
+    <string name="text_button_cancel">Cancelar</string>
 </resources>

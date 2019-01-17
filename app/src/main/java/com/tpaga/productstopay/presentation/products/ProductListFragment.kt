@@ -70,6 +70,7 @@ class ProductListFragment : Fragment() {
 
     private fun showAlertDialog() {
         val builder = AlertDialog.Builder(context!!)
+        builder.setCancelable(false)
         builder.setTitle(getString(R.string.order_notice))
         builder.setMessage(getString(R.string.message_confirm_purchase))
         builder.setPositiveButton(getString(R.string.text_button_accept)) { dialog, _ ->
@@ -79,6 +80,7 @@ class ProductListFragment : Fragment() {
                 Navigation.findNavController(it).navigate(navDirections)
             }
         }
+        builder.setNegativeButton(getString(R.string.text_button_cancel)) { dialog, _ -> dialog.cancel() }
         val dialog: AlertDialog = builder.create()
         dialog.show()
 
