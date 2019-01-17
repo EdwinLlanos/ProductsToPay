@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tpaga.productstopay.R
 import com.tpaga.productstopay.domain.Product
@@ -60,11 +61,11 @@ class ProductListFragment : Fragment() {
     private fun renderList(it: Resource<List<ProductEntity>>?) {
         if (it?.data?.size == 1) {
             showAlertDialog()
-            return
+        } else {
+            viewModel.buyProduct(
+                getProductToPay(product)
+            )
         }
-        viewModel.buyProduct(
-            getProductToPay(product)
-        )
     }
 
     private fun showAlertDialog() {
@@ -73,9 +74,10 @@ class ProductListFragment : Fragment() {
         builder.setMessage(getString(R.string.message_confirm_purchase))
         builder.setPositiveButton(getString(R.string.text_button_accept)) { dialog, _ ->
             dialog.cancel()
-            viewModel.buyProduct(
-                getProductToPay(product)
-            )
+            view?.let {
+                val navDirections = ProductListFragmentDirections.moveToPurchases()
+                Navigation.findNavController(it).navigate(navDirections)
+            }
         }
         val dialog: AlertDialog = builder.create()
         dialog.show()

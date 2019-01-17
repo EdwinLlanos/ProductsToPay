@@ -14,31 +14,31 @@ object ProductManager {
         Product(
             "1",
             "Café late",
-            "1.000",
+            "1000",
             "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aut exercitationem nesciunt nulla quam reiciendis"
         ),
         Product(
             "2",
             "Capuchino",
-            "2.000",
+            "2000",
             "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aut exercitationem nesciunt nulla quam reiciendis"
         ),
         Product(
             "3",
             "Café expreso",
-            "3.000",
+            "3000",
             "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aut exercitationem nesciunt nulla quam reiciendis"
         ),
         Product(
             "4",
             "Chocolate",
-            "4.000",
+            "4000",
             "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aut exercitationem nesciunt nulla quam reiciendis"
         ),
         Product(
             "4",
             "Mocaccino",
-            "4.500",
+            "4500",
             "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aut exercitationem nesciunt nulla quam reiciendis"
         )
     )

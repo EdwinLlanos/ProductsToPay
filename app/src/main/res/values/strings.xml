@@ -12,6 +12,6 @@
     <string name="order_text_name">"Nombre: %1$s"</string>
     <string name="order_text_count">"Cantidad: %1$d"</string>
     <string name="order_text_id">"Id: %1$s"</string>
-    <string name="message_confirm_purchase">Ya tienes una órden con este producto, ¿deseas realizar una nueva compra?.
+    <string name="message_confirm_purchase">Ya tienes una órden con este producto, ¿deseas ver tus compras?.
     </string>
 </resources>
