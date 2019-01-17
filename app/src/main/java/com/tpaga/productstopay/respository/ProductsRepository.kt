@@ -1,8 +1,8 @@
 package com.tpaga.productstopay.respository
 
 import com.tpaga.productstopay.cache.Cache
-import com.tpaga.productstopay.presentation.products.model.request.PurchaseEntity
-import com.tpaga.productstopay.presentation.products.model.response.ProductEntity
+import com.tpaga.productstopay.presentation.products.model.request.OrderRequest
+import com.tpaga.productstopay.presentation.products.model.response.OrderEntity
 import com.tpaga.productstopay.respository.remote.ProductsApi
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -10,46 +10,46 @@ import io.reactivex.schedulers.Schedulers
 
 class ProductsRepository constructor(
     private val productsApi: ProductsApi,
-    private val cache: Cache<List<ProductEntity>>
+    private val cache: Cache<List<OrderEntity>>
 ) {
     private val key = "User Purchases"
-    fun buyProduct(purchaseEntity: PurchaseEntity): Single<ProductEntity> {
-        return productsApi.buyProduct(purchaseEntity)
+    fun buyProduct(orderRequest: OrderRequest): Single<OrderEntity> {
+        return productsApi.buyProduct(orderRequest)
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSuccess { set(it) }
     }
 
-    fun getStatus(token: String): Single<ProductEntity> {
+    fun getStatus(token: String): Single<OrderEntity> {
         return productsApi.getStatus(token)
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSuccess { set(it) }
     }
 
-    private fun set(product: ProductEntity?) {
-        val newList: MutableList<ProductEntity> = ArrayList()
-        product?.let {
+    private fun set(order: OrderEntity?) {
+        val newList: MutableList<OrderEntity> = ArrayList()
+        order?.let {
             cache.load(key)
                 .subscribe({ list ->
-                    newList.addAll(list.filter { p -> p.orderId != product.orderId })
-                    newList.add(product)
+                    newList.addAll(list.filter { p -> p.orderId != order.orderId })
+                    newList.add(order)
                     saveList(newList)
                 }, {
                     saveList(newList)
-                    set(product)
+                    set(order)
                 })
         }
     }
 
-    private fun saveList(list: MutableList<ProductEntity>) {
+    private fun saveList(list: MutableList<OrderEntity>) {
         cache.save(key, list)
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe()
     }
 
-    fun loadById(productId: String): Single<List<ProductEntity>> {
+    fun loadById(productId: String): Single<List<OrderEntity>> {
         return cache.load(key)
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
@@ -58,7 +58,7 @@ class ProductsRepository constructor(
             }
     }
 
-    fun loadAll(): Single<List<ProductEntity>> {
+    fun loadAll(): Single<List<OrderEntity>> {
         return cache.load(key)
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())

@@ -4,7 +4,7 @@ import com.squareup.moshi.Json
 import com.tpaga.productstopay.domain.Product
 
 
-data class PurchaseEntity(
+data class OrderRequest(
     @field:Json(name = "cost")
     var cost: String,
     @field:Json(name = "expires_at")

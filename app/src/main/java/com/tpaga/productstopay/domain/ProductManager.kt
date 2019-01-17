@@ -1,14 +1,13 @@
 package com.tpaga.productstopay.domain
 
 import android.os.Build
-import com.tpaga.productstopay.presentation.products.model.request.PurchaseEntity
+import com.tpaga.productstopay.presentation.products.model.request.OrderRequest
 
 object ProductManager {
 
     private const val DESCRIPTION = "Lorem ipsum dolor sit amet, consectetur adipisicing elit."
     private const val EXPIRES_AT = "2019-11-05T20:10:57.549653+00:00"
     private const val USER_IP_ADDRESS = "10.14.2.162"
-
 
     private var products = listOf(
         Product(
@@ -47,14 +46,14 @@ object ProductManager {
         return products
     }
 
-    fun getProductToPay(product: Product): PurchaseEntity {
-        return PurchaseEntity(
+    fun getProductToPay(product: Product): OrderRequest {
+        return OrderRequest(
             product.value,
             EXPIRES_AT,
             "${System.currentTimeMillis()}",
             product.id,
             DESCRIPTION,
-            "https://www.ptpay.com/product/${product.id}",
+            "https://www.ptpay.com/order/${product.id}",
             listOf(product),
             Build.ID,
             USER_IP_ADDRESS,

@@ -2,7 +2,7 @@ package com.tpaga.productstopay.presentation.orders
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.tpaga.productstopay.presentation.products.model.response.ProductEntity
+import com.tpaga.productstopay.presentation.products.model.response.OrderEntity
 import com.tpaga.productstopay.respository.ProductsRepository
 import com.tpaga.productstopay.utilities.Resource
 import com.tpaga.productstopay.utilities.setError
@@ -15,14 +15,14 @@ class OrderListViewModel(
 ) : ViewModel() {
 
     private val compositeDisposable = CompositeDisposable()
-    val orderList = MutableLiveData<Resource<List<ProductEntity>>>()
-    val orderUpdate = MutableLiveData<Resource<ProductEntity>>()
+    val orderList = MutableLiveData<Resource<List<OrderEntity>>>()
+    val orderUpdate = MutableLiveData<Resource<OrderEntity>>()
 
     init {
         load()
     }
 
-    private fun load() {
+    fun load() {
         compositeDisposable.add(
             productsRepository.loadAll()
                 .doOnSubscribe { orderList.setLoading() }
@@ -35,10 +35,7 @@ class OrderListViewModel(
             productsRepository.getStatus(token)
                 .doOnSubscribe { orderUpdate.setLoading() }
                 .subscribe(
-                    {
-                        orderUpdate.setSuccess(it)
-                        load()
-                    }, { orderUpdate.setError(it.message) })
+                    { orderUpdate.setSuccess(it) }, { orderUpdate.setError(it.message) })
         )
     }
 

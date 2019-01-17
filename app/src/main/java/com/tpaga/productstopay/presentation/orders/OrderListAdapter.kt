@@ -6,60 +6,60 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.tpaga.productstopay.R
-import com.tpaga.productstopay.presentation.products.model.response.ProductEntity
+import com.tpaga.productstopay.presentation.products.model.response.OrderEntity
 import com.tpaga.productstopay.utilities.inflate
 import kotlinx.android.synthetic.main.item_order_list.view.*
 
 
-class OrderListAdapter : RecyclerView.Adapter<OrderListAdapter.ProductHolder>() {
+class OrderListAdapter : RecyclerView.Adapter<OrderListAdapter.OrderHolder>() {
 
-    private var productList: List<ProductEntity> = listOf()
+    private var orderList: List<OrderEntity> = listOf()
 
-    fun add(productList: List<ProductEntity>) {
-        this.productList = productList
+    fun add(orderList: List<OrderEntity>) {
+        this.orderList = orderList
         notifyDataSetChanged()
     }
 
-    var onProductClicked: ((product: ProductEntity) -> Unit)? = null
+    var onProductClicked: ((order: OrderEntity) -> Unit)? = null
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OrderHolder {
         val inflatedView = parent.inflate(R.layout.item_order_list, false)
-        return ProductHolder(inflatedView, onProductClicked)
+        return OrderHolder(inflatedView, onProductClicked)
 
     }
 
-    override fun onBindViewHolder(holder: ProductHolder, position: Int) {
-        holder.bindCity(productList[position])
+    override fun onBindViewHolder(holder: OrderHolder, position: Int) {
+        holder.OrderCity(orderList[position])
 
     }
 
     override fun getItemCount(): Int {
-        return productList.size
+        return orderList.size
     }
 
 
-    class ProductHolder(
+    class OrderHolder(
         private val view: View,
-        private val onProductClicked: ((product: ProductEntity) -> Unit)?
+        private val onProductClicked: ((order: OrderEntity) -> Unit)?
     ) :
         RecyclerView.ViewHolder(view) {
-        private lateinit var product: ProductEntity
+        private lateinit var order: OrderEntity
 
         init {
             view.setOnClickListener {
-                onProductClicked!!.invoke(product)
+                onProductClicked!!.invoke(order)
             }
         }
 
         @SuppressLint("SetTextI18n")
-        fun bindCity(product: ProductEntity) {
-            this.product = product
-            view.orderId.text = view.context.getString(R.string.order_text_id, product.orderId)
-            view.orderStatus.text = view.context.getString(R.string.order_text_status, product.status)
-            view.orderDescription.text = product.purchaseDescription
-            view.orderPrice.text = view.context.getString(R.string.order_text_price, product.cost)
-            view.productName.text = view.context.getString(R.string.order_text_name, product.purchaseItems[0].name)
-            view.productCount.text = view.context.getString(R.string.order_text_count, product.purchaseItems.size)
+        fun OrderCity(order: OrderEntity) {
+            this.order = order
+            view.orderId.text = view.context.getString(R.string.order_text_id, order.orderId)
+            view.orderStatus.text = view.context.getString(R.string.order_text_status, order.status)
+            view.orderDescription.text = order.purchaseDescription
+            view.orderPrice.text = view.context.getString(R.string.order_text_price, order.cost)
+            view.productName.text = view.context.getString(R.string.order_text_name, order.purchaseItems[0].name)
+            view.productCount.text = view.context.getString(R.string.order_text_count, order.purchaseItems.size)
         }
 
     }

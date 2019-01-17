@@ -10,7 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tpaga.productstopay.R
 import com.tpaga.productstopay.presentation.orders.OrderListFragmentArgs.fromBundle
-import com.tpaga.productstopay.presentation.products.model.response.ProductEntity
+import com.tpaga.productstopay.presentation.products.model.response.OrderEntity
 import com.tpaga.productstopay.utilities.Resource
 import com.tpaga.productstopay.utilities.ResourceState
 import com.tpaga.productstopay.utilities.gone
@@ -40,7 +40,7 @@ class OrderListFragment : Fragment() {
             viewModel.getTokenByOrderId(orderId)
     }
 
-    private fun orderUpdate(it: Resource<ProductEntity>?) {
+    private fun orderUpdate(it: Resource<OrderEntity>?) {
 
         when (it?.state) {
             ResourceState.LOADING -> loading.visible()
@@ -52,20 +52,21 @@ class OrderListFragment : Fragment() {
         }
     }
 
-    private fun showAlertDialog(it: Resource<ProductEntity>?) {
+    private fun showAlertDialog(it: Resource<OrderEntity>?) {
         it?.data?.let { noNullOrder ->
             val builder = AlertDialog.Builder(context!!)
             builder.setTitle(getString(R.string.order_update))
             builder.setMessage(getString(R.string.message_order_update, noNullOrder.orderId, noNullOrder.status))
             builder.setPositiveButton(getString(R.string.text_button_accept)) { dialog, _ ->
                 dialog.cancel()
+                viewModel.load()
             }
             val dialog: AlertDialog = builder.create()
             dialog.show()
         }
     }
 
-    private fun render(it: Resource<List<ProductEntity>>?) {
+    private fun render(it: Resource<List<OrderEntity>>?) {
         var ordersCount = 0
         it?.data?.let {
             ordersCount = it.size
@@ -100,8 +101,8 @@ class OrderListFragment : Fragment() {
         }
     }
 
-    private fun orderClicked(product: ProductEntity) {
-        viewModel.getStatus(product.token)
+    private fun orderClicked(order: OrderEntity) {
+        viewModel.getStatus(order.token)
     }
 
 }

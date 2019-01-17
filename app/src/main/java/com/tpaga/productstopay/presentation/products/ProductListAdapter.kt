@@ -28,7 +28,7 @@ class ProductListAdapter : RecyclerView.Adapter<ProductListAdapter.ProductHolder
     }
 
     override fun onBindViewHolder(holder: ProductHolder, position: Int) {
-        holder.bindCity(productList[position])
+        holder.bindProduct(productList[position])
 
     }
 
@@ -50,12 +50,11 @@ class ProductListAdapter : RecyclerView.Adapter<ProductListAdapter.ProductHolder
             }
         }
 
-
-        fun bindCity(product: Product) {
+        fun bindProduct(product: Product) {
             this.product = product
             view.productName.text = product.name
             view.productDescription.text = product.description
-            view.productPrice.text = "Valor: $" + product.value
+            view.productPrice.text = view.context.getString(R.string.order_text_price, product.value)
         }
 
     }

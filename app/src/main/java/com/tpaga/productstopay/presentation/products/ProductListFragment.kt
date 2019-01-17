@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.tpaga.productstopay.R
 import com.tpaga.productstopay.domain.Product
 import com.tpaga.productstopay.domain.ProductManager.getProductToPay
-import com.tpaga.productstopay.presentation.products.model.response.ProductEntity
+import com.tpaga.productstopay.presentation.products.model.response.OrderEntity
 import com.tpaga.productstopay.utilities.Resource
 import com.tpaga.productstopay.utilities.ResourceState
 import com.tpaga.productstopay.utilities.gone
@@ -58,7 +58,7 @@ class ProductListFragment : Fragment() {
         initRecyclerView()
     }
 
-    private fun renderList(it: Resource<List<ProductEntity>>?) {
+    private fun renderList(it: Resource<List<OrderEntity>>?) {
         if (it?.data?.size == 1) {
             showAlertDialog()
         } else {
@@ -87,7 +87,7 @@ class ProductListFragment : Fragment() {
     }
 
 
-    private fun render(it: Resource<ProductEntity>) {
+    private fun render(it: Resource<OrderEntity>) {
         when (it.state) {
             ResourceState.LOADING -> loading.visible()
             ResourceState.SUCCESS -> {

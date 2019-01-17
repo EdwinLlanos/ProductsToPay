@@ -28,7 +28,7 @@
                 android:defaultValue="0"/>
         <deepLink
                 android:id="@+id/webUrlDeepLink"
-                app:uri="https://www.ptpay.com/product/{orderId}"/>
+                app:uri="https://www.ptpay.com/order/{orderId}"/>
     </fragment>
 
 </navigation>

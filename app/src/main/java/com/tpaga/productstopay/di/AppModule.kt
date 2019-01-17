@@ -5,7 +5,7 @@ import com.tpaga.productstopay.cache.Cache
 import com.tpaga.productstopay.network.createNetworkClient
 import com.tpaga.productstopay.presentation.orders.OrderListViewModel
 import com.tpaga.productstopay.presentation.products.ProductListViewModel
-import com.tpaga.productstopay.presentation.products.model.response.ProductEntity
+import com.tpaga.productstopay.presentation.products.model.response.OrderEntity
 import com.tpaga.productstopay.respository.ProductsRepository
 import com.tpaga.productstopay.respository.remote.ProductsApi
 import org.koin.android.viewmodel.ext.koin.viewModel
@@ -27,14 +27,12 @@ val networkModule: Module = module {
 }
 
 val cacheModule: Module = module {
-    single(name = PURCHASE_ENTITY_CACHE) { Cache<List<ProductEntity>>() }
+    single(name = PURCHASE_ENTITY_CACHE) { Cache<List<OrderEntity>>() }
 }
-
 
 private const val BASE_URL = "https://stag.wallet.tpaga.co/merchants/api/v1/"
 
 private val retrofit: Retrofit = createNetworkClient(BASE_URL, BuildConfig.DEBUG)
-
 
 private val productsApi: ProductsApi = retrofit.create(ProductsApi::class.java)
 
