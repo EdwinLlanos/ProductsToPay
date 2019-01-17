@@ -18,8 +18,4 @@ class Cache<T> {
 
     fun save(key: String, anyObject: T): Single<T> =
         book.write(key, anyObject).toSingleDefault(anyObject)
-
-    fun delete() {
-        book.delete("")
-    }
 }
