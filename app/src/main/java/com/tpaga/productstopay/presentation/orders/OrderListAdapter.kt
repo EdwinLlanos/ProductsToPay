@@ -54,7 +54,7 @@ class OrderListAdapter : RecyclerView.Adapter<OrderListAdapter.ProductHolder>() 
         @SuppressLint("SetTextI18n")
         fun bindCity(product: ProductEntity) {
             this.product = product
-            view.orderId.text = product.orderId
+            view.orderId.text = view.context.getString(R.string.order_text_id, product.orderId)
             view.orderStatus.text = view.context.getString(R.string.order_text_status, product.status)
             view.orderDescription.text = product.purchaseDescription
             view.orderPrice.text = view.context.getString(R.string.order_text_price, product.cost)

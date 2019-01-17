@@ -9,4 +9,5 @@
     <string name="text_button_accept">Aceptar</string>
     <string name="order_text_status">"Estado: %1$s"</string>
     <string name="order_text_price">"Valor: %1$s"</string>
+    <string name="order_text_id">"Consecutivo: %1$s"</string>
 </resources>
