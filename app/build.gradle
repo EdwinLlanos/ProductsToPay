@@ -63,4 +63,8 @@ dependencies {
 
     //cache
     implementation "com.github.pakoito:RxPaper2:$rootProject.rxpaper"
+
+    //Kotlin Coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$rootProject.kotlinCoroutineVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$rootProject.kotlinCoroutineVersion"
 }

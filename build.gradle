@@ -45,6 +45,9 @@ buildscript {
         //cache
         rxpaper = "1.2.0"
 
+        //Kotlin Coroutines
+        kotlinCoroutineVersion = "1.0.1"
+
     }
     repositories {
         google()
